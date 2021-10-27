@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>JSTiles Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.7</maven.compiler.source>
@@ -28,6 +28,12 @@
 			<artifactId>tiles-extras</artifactId>
 			<version>3.0.8</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.servlet/jstl -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 		<!-- The superclass "javax.servlet.http.HttpServlet" was not found on the 
 			Java Build Path -->
@@ -37,9 +43,15 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.21</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>JSTiles</finalName>
-		
+
 	</build>
 </project>

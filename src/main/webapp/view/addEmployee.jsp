@@ -1,9 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
  <style>
@@ -53,21 +55,26 @@
         }
     </style>
 <body>
+<jsp:useBean id="employee" class="model.Employee" />
+<jsp:setProperty property="id" name="employee" />
+	<sql:query dataSource="${mysql }" var="result">
+ 	Select * from infor where id='${employee.id}';
+ </sql:query>
  <form action="/JSTiles/handler.jsp" class="form-employee" method="Post">
             <h2 class="employee-tilte">Add an Employee</h2>
             <span class="employee-infor">Name:</span>
             <input type="text" name="nameEmployee"
-            class="employee-detail" placeholder="Enter name">
+            class="employee-detail" placeholder="Enter name" value="${result.rows[0].name }">
             <span class="employee-infor__gender">Gender:</span>
             <input type="radio" id="gender" value="Male" name="gender"
             class="employee-detail__gender">Male
             <input type="radio" id="gender" value="Female" name="gender"
             class="employee-detail__gender">Female
-            <span class="employee-infor">Date of birth:</span>
+            <span class="employee-infor" >Date of birth:</span>
             <input type="date" name="dateOfBirthday"
-            class="employee-detail" placeholder="yyyy/mm/dd">
+            class="employee-detail" placeholder="yyyy/mm/dd" value="${result.rows[0].dateOfBirthday }">
             <span class="employee-infor">Department</span>
-            <select class="employee-option" name="department">
+            <select class="employee-option" name="department" value="${result.rows[0].department}">
                 <option value="FA">FA</option>
                 <option value="FSU1">FSU1</option>
                 <option value="FSU2">FSU2</option>

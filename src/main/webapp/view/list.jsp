@@ -1,10 +1,12 @@
 <%@page import="model.ListEmployee"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <style>
@@ -35,6 +37,9 @@ td:first-child, th:first-child {
 }
 </style>
 <body>
+	<sql:query dataSource="${mysql }" var="result">
+ 	Select * from infor;
+ </sql:query>
 	<h2 class="list-title">List Employee</h2>
 	<table>
 		<tr>
@@ -45,16 +50,19 @@ td:first-child, th:first-child {
 			<th>Department Name</th>
 		</tr>
 
-		<% for(int i=0 ; i< ListEmployee.container.size();i++){
-        	   %>
-		<tr>
-			<td><%= i+1 %></td>
-			<td><%= ListEmployee.container.get(i).getNameEmployee() %></td>
-			<td><%= ListEmployee.container.get(i).getGender() %></td>
-			<td><%= ListEmployee.container.get(i).getDateOfBirthday() %></td>
-			<td><%= ListEmployee.container.get(i).getDepartment() %></td>
-		</tr>
-		<% } %>
+		<c:forEach var="row" items="${result.rows}">
+			<tr>
+				<td><c:out value="${row.id}" /></td>
+				<td><c:out value="${row.name}" /></td>
+				<td><c:out value="${row.Male}" /></td>
+				<td><c:out value="${row.dateOfBirthday}" /></td>
+				<td><c:out value="${row.department}" /></td>
+				<td><a href="/JSTiles/view/addEmployee.jsp?id=<c:out value="${row.id}" />">edit</a>
+					<a href="delete.jsp?id=<c:out value="${row.id}" />">delete</a></td>
+			</tr>
+
+		</c:forEach>
+
 	</table>
 </body>
 </html>

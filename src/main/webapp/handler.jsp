@@ -1,5 +1,7 @@
 <%@page import="model.ListEmployee"%>
 <%@page import="model.Employee"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql"  prefix="sql" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,18 +17,22 @@
 	<jsp:setProperty property="*" name="em"/>
 	<td><jsp:getProperty property="nameEmployee" name="em"/></td>
 	
-	<% 
-		
-		request.setAttribute("msg2", "Thêm thành công");
-		String name = request.getParameter("nameEmployee");
-		String gender = request.getParameter("gender");
-		String date = request.getParameter("dateOfBirthday");
-		String department = request.getParameter("department");
-		Employee e1 = new Employee(name,gender,date,department);
-		ListEmployee.container.add(e1);
-		RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
-		rd.forward(request, response);
-	%>
+	<sql:update dataSource="${mysql}" var="count">
+	
+		Insert into infor(name, gender, dateOfBirthday,department) values(?,?,?,?);
+		<sql:param value="${param.nameEmployee}"/>
+		<sql:param value="${param.gender}"/>
+		<sql:param value="${param.dateOfBirthday}"/>
+		<sql:param value="${param.department}"/>
+	</sql:update>
+	
+	<c:if test="${count >0 }">
+		<c:redirect url="home.jsp">
+			<c:param name="msg2" value="Thêm thành công"/>
+		</c:redirect>
+	</c:if>
+	
+	
          
 </body>
 </html>
