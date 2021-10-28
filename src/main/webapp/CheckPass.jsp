@@ -1,4 +1,3 @@
-<%@page import="model.ListEmployee"%>
 <%@page import="model.Employee"%>
 <%@page import="controller.HandlerPass"%>
 <%@page import="java.util.ArrayList"%>
@@ -17,7 +16,6 @@
 		if(pass.equals(HandlerPass.pass)){
 			HttpSession session1 = request.getSession(true);
 			session1.setAttribute("sessionName", name);
-			ListEmployee.container = new ArrayList<Employee>();
 			
 			RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
 			rd.forward(request, response);

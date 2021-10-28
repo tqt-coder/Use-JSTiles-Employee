@@ -1,4 +1,3 @@
-<%@page import="model.ListEmployee"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -54,7 +53,7 @@ td:first-child, th:first-child {
 			<tr>
 				<td><c:out value="${row.id}" /></td>
 				<td><c:out value="${row.name}" /></td>
-				<td><c:out value="${row.Male}" /></td>
+				<td><c:out value="${row.gender}" /></td>
 				<td><c:out value="${row.dateOfBirthday}" /></td>
 				<td><c:out value="${row.department}" /></td>
 				<td><a href="/JSTiles/view/addEmployee.jsp?id=<c:out value="${row.id}" />">edit</a>
